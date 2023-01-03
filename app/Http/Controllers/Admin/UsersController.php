@@ -20,7 +20,7 @@ class UsersController extends Controller
     {
         $users = User::latest()->paginate(10);
 
-        return view('auth.users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -30,7 +30,7 @@ class UsersController extends Controller
      */
     public function create() 
     {
-        return view('auth.users.create');
+        return view('admin.users.create');
     }   
 
     /**
@@ -62,7 +62,7 @@ class UsersController extends Controller
      */
     public function show(User $user) 
     {
-        return view('auth.users.show', [
+        return view('admin.users.show', [
             'user' => $user
         ]);
     }
@@ -76,7 +76,7 @@ class UsersController extends Controller
      */
     public function edit(User $user) 
     {
-        return view('auth.users.edit', [
+        return view('admin.users.edit', [
             'user' => $user,
             'userRole' => $user->roles->pluck('name')->toArray(),
             'roles' => Role::latest()->get()

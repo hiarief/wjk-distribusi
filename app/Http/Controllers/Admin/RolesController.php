@@ -28,7 +28,7 @@ class RolesController extends Controller
     public function index(Request $request)
     {
         $roles = Role::orderBy('id', 'DESC')->paginate(5);
-        return view('auth.spatie.roles.index', compact('roles'))->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('admin.roles.index', compact('roles'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -39,7 +39,7 @@ class RolesController extends Controller
     public function create()
     {
         $permissions = Permission::get();
-        return view('auth.spatie.roles.create', compact('permissions'));
+        return view('admin.roles.create', compact('permissions'));
     }
 
     /**
@@ -74,7 +74,7 @@ class RolesController extends Controller
         $role = $role;
         $rolePermissions = $role->permissions;
 
-        return view('auth.spatie.roles.show', compact('role', 'rolePermissions'));
+        return view('admin.roles.show', compact('role', 'rolePermissions'));
     }
 
     /**
@@ -89,7 +89,7 @@ class RolesController extends Controller
         $rolePermissions = $role->permissions->pluck('name')->toArray();
         $permissions = Permission::get();
 
-        return view('auth.spatie.roles.edit', compact('role', 'rolePermissions', 'permissions'));
+        return view('admin.roles.edit', compact('role', 'rolePermissions', 'permissions'));
     }
 
     /**

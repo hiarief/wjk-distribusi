@@ -19,7 +19,7 @@ class PermissionsController extends Controller
     {
         $permissions = Permission::all();
 
-        return view('auth.spatie.permissions.index', [
+        return view('admin.permissions.index', [
             'permissions' => $permissions,
         ]);
     }
@@ -31,7 +31,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        return view('auth.spatie.permissions.create');
+        return view('admin.permissions.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class PermissionsController extends Controller
      */
     public function edit(Permission $permission)
     {
-        return view('auth.spatie.permissions.edit', [
+        return view('admin.permissions.edit', [
             'permission' => $permission,
         ]);
     }
