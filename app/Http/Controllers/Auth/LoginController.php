@@ -33,7 +33,7 @@ class LoginController extends Controller
         if (!Auth::validate($credentials)):
             return redirect()
                 ->to('login')
-                ->withErrors(trans('auth.failed'));
+                ->with('error','username atau password yang anda masukan salah');
         endif;
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
