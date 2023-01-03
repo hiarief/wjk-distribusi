@@ -54,4 +54,5 @@ class CreateRoutePermissionsCommand extends Command
 
         $this->info('Permission routes added successfully.');
     }
+    // php artisan permission:create-permission-routes
 }

@@ -1,34 +1,39 @@
-@extends('layouts.app-master')
+@extends('layouts.siode.app')
+@section('title', 'Show role')
 
 @section('content')
-    <div class="bg-light rounded p-4">
-        <h1>{{ ucfirst($role->name) }} Role</h1>
-        <div class="lead">
-
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h5><strong>{{ ucfirst($role->name) }}</strong> Role</h5>
+            </div>
         </div>
-
-        <div class="container mt-4">
-
-            <h3>Assigned permissions</h3>
-
-            <table class="table-striped table">
+        <div class="card-body">
+            <h6>Assigned permissions</h6>
+            <table class="table-striped table-bordered table-sm table">
                 <thead>
-                    <th scope="col" width="20%">Name</th>
-                    <th scope="col" width="1%">Guard</th>
-                </thead>
-
-                @foreach ($rolePermissions as $permission)
-                    <tr>
-                        <td>{{ $permission->name }}</td>
-                        <td>{{ $permission->guard_name }}</td>
+                    <tr class="text-center">
+                        <th scope="col" width="1%">No</th>
+                        <th scope="col" width="20%">Name</th>
+                        <th scope="col" width="1%">Guard</th>
                     </tr>
-                @endforeach
+                </thead>
+                <tbody>
+                    @foreach ($rolePermissions as $permission)
+                        <tr class="text-center">
+                            <th>{{ $loop->iteration }}</th>
+                            <td>{{ $permission->name }}</td>
+                            <td>{{ $permission->guard_name }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
-
-    </div>
-    <div class="mt-4">
-        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-info">Edit</a>
-        <a href="{{ route('roles.index') }}" class="btn btn-default">Back</a>
+        <div class="card-footer">
+            <div class="mt-4">
+                <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-info">Edit</a>
+                <a href="{{ route('roles.index') }}" class="btn btn-default">Back</a>
+            </div>
+        </div>
     </div>
 @endsection
