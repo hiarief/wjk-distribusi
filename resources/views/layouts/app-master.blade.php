@@ -26,6 +26,10 @@
                 font-size: 3.5rem;
             }
         }
+
+        .float-right {
+            float: right;
+        }
     </style>
 
 
@@ -37,12 +41,16 @@
 
     @include('layouts.partials.navbar')
 
-    <main class="container">
+    <main class="container mt-5">
         @yield('content')
     </main>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{!! url('assets/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
 
+    @section('scripts')
+
+    @show
 </body>
 
 </html>

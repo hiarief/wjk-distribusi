@@ -8,11 +8,15 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0 mb-2">
-                <li><a href="#" class="nav-link text-secondary px-2">Home</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                <li><a href="{{ route('home.index') }}" class="nav-link px-2 text-white">Home</a></li>
+                @auth
+                    @role('admin')
+                        <li><a href="{{ route('users.index') }}" class="nav-link px-2 text-white">Users</a></li>
+                        <li><a href="{{ route('roles.index') }}" class="nav-link px-2 text-white">Roles</a></li>
+                        <li><a href="{{ route('permissions.index') }}" class="nav-link px-2 text-white">Permissions</a></li>
+                    @endrole
+                    <li><a href="{{ route('posts.index') }}" class="nav-link px-2 text-white">Posts</a></li>
+                @endauth
             </ul>
 
             <form class="col-12 col-lg-auto mb-lg-0 me-lg-3 mb-3">
@@ -21,7 +25,7 @@
             </form>
 
             @auth
-                {{ auth()->user()->name }}
+                {{ auth()->user()->name }}&nbsp;
                 <div class="text-end">
                     <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
                 </div>
