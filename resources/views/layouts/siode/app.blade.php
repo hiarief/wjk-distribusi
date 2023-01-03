@@ -67,9 +67,9 @@
             </div>
         </aside>
 
-        <form id="logoutform" action="{!! route('logout') !!}" method="POST" style="display: none;">
+        {{--  <form id="logoutform" action="{!! route('logout') !!}" method="POST" style="display: none;">
             {!! csrf_field() !!}
-        </form>
+        </form>  --}}
 
         <footer class="main-footer text-sm">
             <div class="d-none d-sm-inline float-right">
