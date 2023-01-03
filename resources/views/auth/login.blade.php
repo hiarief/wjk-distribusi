@@ -16,7 +16,7 @@
                 <label for="floatingName">Email or Username</label>
                 <span class="text-danger text-left">{{ $errors->first('username') }}</span>
             @endif
-            <span class="fas fa-envelope"></span>
+            <span class="fas fa-envelope"></span>   
         </div>
 
         <div class="form-group form-floating mb-3">

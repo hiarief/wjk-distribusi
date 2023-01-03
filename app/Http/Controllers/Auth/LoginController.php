@@ -9,6 +9,12 @@ use App\Http\Requests\Auth\LoginRequest;
 
 class LoginController extends Controller
 {
+    protected $redirectTo = '/dashboard';
+    
+    public function __construct()
+    {
+        $this->redirectTo = redirect('login');
+    }
     /**
      * Display login page.
      *
@@ -33,7 +39,7 @@ class LoginController extends Controller
         if (!Auth::validate($credentials)):
             return redirect()
                 ->to('login')
-                ->with('error','username atau password yang anda masukan salah');
+                ->with('error', 'username atau password yang anda masukan salah');
         endif;
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
