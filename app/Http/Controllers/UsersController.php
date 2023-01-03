@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 
 class UsersController extends Controller
 {
@@ -20,7 +20,7 @@ class UsersController extends Controller
     {
         $users = User::latest()->paginate(10);
 
-        return view('users.index', compact('users'));
+        return view('auth.users.index', compact('users'));
     }
 
     /**
@@ -30,8 +30,8 @@ class UsersController extends Controller
      */
     public function create() 
     {
-        return view('users.create');
-    }
+        return view('auth.users.create');
+    }   
 
     /**
      * Store a newly created user
@@ -46,7 +46,7 @@ class UsersController extends Controller
         //For demo purposes only. When creating user or inviting a user
         // you should create a generated random password and email it to the user
         $user->create(array_merge($request->validated(), [
-            'password' => 'test' 
+            'password' => $request->password 
         ]));
 
         return redirect()->route('users.index')
@@ -62,7 +62,7 @@ class UsersController extends Controller
      */
     public function show(User $user) 
     {
-        return view('users.show', [
+        return view('auth.users.show', [
             'user' => $user
         ]);
     }
@@ -76,7 +76,7 @@ class UsersController extends Controller
      */
     public function edit(User $user) 
     {
-        return view('users.edit', [
+        return view('auth.users.edit', [
             'user' => $user,
             'userRole' => $user->roles->pluck('name')->toArray(),
             'roles' => Role::latest()->get()
@@ -93,7 +93,13 @@ class UsersController extends Controller
      */
     public function update(User $user, UpdateUserRequest $request) 
     {
-        $user->update($request->validated());
+        // $user->update($request->validated(), [
+        //     'password' => $request->password 
+        // ]);
+
+        $user->update(array_merge($request->validated(), [
+            'password' => $request->password 
+        ]));
 
         $user->syncRoles($request->get('role'));
 

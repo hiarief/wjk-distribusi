@@ -41,13 +41,20 @@
                     <select class="form-control" name="role" required>
                         <option value="">Select role</option>
                         @foreach ($roles as $role)
-                            <option value="{{ $role->id }}"
-                                {{ in_array($role->name, $userRole) ? 'selected' : '' }}>
+                            <option value="{{ $role->id }}" {{ in_array($role->name, $userRole) ? 'selected' : '' }}>
                                 {{ $role->name }}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('role'))
                         <span class="text-danger text-left">{{ $errors->first('role') }}</span>
+                    @endif
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input value="{{ $user->password }}" type="password" class="form-control" name="password"
+                        placeholder="Password" required>
+                    @if ($errors->has('password'))
+                        <span class="text-danger text-left">{{ $errors->first('password') }}</span>
                     @endif
                 </div>
 

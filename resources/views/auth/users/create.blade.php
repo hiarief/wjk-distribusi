@@ -35,6 +35,31 @@
                         <span class="text-danger text-left">{{ $errors->first('username') }}</span>
                     @endif
                 </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input value="{{ old('password') }}" type="password" class="form-control" name="password"
+                        placeholder="Password" required>
+                    @if ($errors->has('password'))
+                        <span class="text-danger text-left">{{ $errors->first('password') }}</span>
+                    @endif
+                </div>
+                {{--  <div class="row">
+                    <div class="col">
+                        <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
+                            <label for="password">{!! trans('cruds.user.fields.password') !!}</label>
+                            <input type="password" id="password" name="password"
+                                class="form-control form-control-sm rounded-0" required>
+                            @if ($errors->has('password'))
+                                <em class="invalid-feedback">
+                                    {!! $errors->first('password') !!}
+                                </em>
+                            @endif
+                            <p class="helper-block">
+                                {!! trans('cruds.user.fields.password_helper') !!}
+                            </p>
+                        </div>
+                    </div>
+                </div>  --}}
 
                 <button type="submit" class="btn btn-primary">Save user</button>
                 <a href="{{ route('users.index') }}" class="btn btn-default">Back</a>
