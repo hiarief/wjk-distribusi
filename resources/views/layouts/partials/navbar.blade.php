@@ -11,7 +11,9 @@
                 <li><a href="{{ route('home.index') }}" class="nav-link px-2 text-white">Home</a></li>
                 @auth
                     @role('admin')
-                        <li><a href="{{ route('users.index') }}" class="nav-link px-2 text-white">Users</a></li>
+                        @can('users.index')
+                            <li><a href="{{ route('users.index') }}" class="nav-link px-2 text-white">Users</a></li>
+                        @endcan
                         <li><a href="{{ route('roles.index') }}" class="nav-link px-2 text-white">Roles</a></li>
                         <li><a href="{{ route('permissions.index') }}" class="nav-link px-2 text-white">Permissions</a></li>
                     @endrole

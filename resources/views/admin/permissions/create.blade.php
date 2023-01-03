@@ -1,14 +1,14 @@
-@extends('layouts.app-master')
-
+@extends('layouts.siode.app')
+@section('title', 'Create permission')
 @section('content')
-    <div class="bg-light rounded p-4">
-        <h2>Add new permission</h2>
-        <div class="lead">
-            Add new permission.
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h5>Add new permission.</h5>
+            </div>
         </div>
-
-        <div class="container mt-4">
-
+        <div class="card-body">
             <form method="POST" action="{{ route('permissions.store') }}">
                 @csrf
                 <div class="mb-3">
@@ -21,10 +21,12 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn btn-primary">Save permission</button>
-                <a href="{{ route('permissions.index') }}" class="btn btn-default">Back</a>
+                <button type="submit" class="btn bg-gradient-primary btn-xs">Save permission</button>
+                <a href="{{ route('permissions.index') }}" class="btn bg-gradient-secondary btn-xs">Back</a>
             </form>
         </div>
+        <div class="card-footer">
 
+        </div>
     </div>
 @endsection

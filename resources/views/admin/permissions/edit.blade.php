@@ -1,14 +1,17 @@
-@extends('layouts.app-master')
+@extends('layouts.siode.app')
+@section('title', 'Update permission')
+@section('content')
 
 @section('content')
-    <div class="bg-light rounded p-4">
-        <h2>Edit permission</h2>
-        <div class="lead">
-            Editing permission.
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h5>
+                    Editing permission.</h5>
+            </div>
         </div>
-
-        <div class="container mt-4">
-
+        <div class="card-body">
             <form method="POST" action="{{ route('permissions.update', $permission->id) }}">
                 @method('patch')
                 @csrf
@@ -22,10 +25,14 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn btn-primary">Save permission</button>
-                <a href="{{ route('permissions.index') }}" class="btn btn-default">Back</a>
+                <button type="submit" class="btn bg-gradient-primary btn-sm">Save permission</button>
+                <a href="{{ route('permissions.index') }}" class="btn bg-gradient-secondary btn-sm">Back</a>
             </form>
         </div>
+        <div class="card-footer">
 
+        </div>
     </div>
+
+
 @endsection
