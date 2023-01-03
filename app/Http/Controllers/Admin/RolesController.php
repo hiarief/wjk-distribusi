@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth\spatie;
+namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
