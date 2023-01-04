@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Siode\Dashboard\DashboardController;
 
 /*
@@ -44,6 +45,11 @@ Route::group(['middleware' => ['auth']], function () {
      * Logout Routes
      */
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
+        
+    Route::get('/{user}/profil', [UsersController::class, 'profil'])->name('users.profil');
+    // Change Password Routes...
+    Route::get('change_password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('auth.change_password');
+    Route::patch('change_password', [ChangePasswordController::class, 'changePassword'])->name('auth.change_password');
 });
 
 Route::group(['middleware' => ['auth', 'permission']], function () {
@@ -60,7 +66,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::patch('/{user}/update', [UsersController::class, 'update'])->name('users.update');
         Route::delete('/{user}/delete', [UsersController::class, 'destroy'])->name('users.destroy');
     });
-
+    
     /**
      * User Routes
      */
@@ -73,12 +79,12 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::patch('/{post}/update', [PostsController::class, 'update'])->name('posts.update');
         Route::delete('/{post}/delete', [PostsController::class, 'destroy'])->name('posts.destroy');
     });
-
+    
     Route::resource('roles', RolesController::class);
     Route::resource('permissions', PermissionsController::class);
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'siode', 'as' => 'siode.'], function () {
-    
+
     Route::resource('dashboard', DashboardController::class);
 });

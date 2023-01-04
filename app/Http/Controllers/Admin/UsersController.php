@@ -121,4 +121,11 @@ class UsersController extends Controller
         return redirect()->route('users.index')
             ->withSuccess(__('User deleted successfully.'));
     }
+
+    public function profil(User $user)
+    {
+        return view('admin.users.profil', [
+            'user' => $user
+        ]);
+    }
 }

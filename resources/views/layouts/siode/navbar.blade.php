@@ -31,8 +31,47 @@
             </div>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+        </li>
+        <li class="nav-item dropdown user-menu">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <img src="https://picsum.photos/300/300" class="user-image img-circle elevation-2"
+                    alt="{!! Auth::user()->name !!}">
+                <span class="d-none d-md-inline">
+                    {!! Auth::user()->name !!}
+                </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                <li class="user-header bg-gradient-warning">
+                    <img src="https://picsum.photos/300/300" class="img-circle elevation-2"
+                        alt="{!! Auth::user()->name !!}">
+                    <p class="">
+                        {!! Auth::user()->name !!}
+                        <small>Sebagai : {{ Auth::user()->roles->pluck('name')[0] ?? '' }}</small>
+                        <small>{{ Carbon\Carbon::now()->isoFormat('DD MMM Y') }}</small>
+                    </p>
+                </li>
+                <li class="user-footer">
+                    @auth
+                        <a href="{{ route('users.profil', Auth::user()->id) }}" class="btn btn-default btn-flat">
+                            <i class="fa fa-fw fa-user text-lightblue"></i>
+                            Profil
+                        </a>
+                        <a class="btn btn-default btn-flat float-right" href="{{ route('logout.perform') }}">
+                            <i class="fa fa-fw fa-power-off text-red"></i>
+                            Keluar
+                        </a>
+                    @endauth
+                </li>
+            </ul>
+        </li>
+
+
         <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
+        {{--  <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-comments"></i>
                 <span class="badge badge-danger navbar-badge">3</span>
@@ -91,9 +130,9 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
             </div>
-        </li>
+        </li>  --}}
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
+        {{--  <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
                 <span class="badge badge-warning navbar-badge">15</span>
@@ -118,16 +157,11 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                <i class="fas fa-expand-arrows-alt"></i>
-            </a>
-        </li>
-        <li class="nav-item">
+        </li>  --}}
+        {{--  <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                 <i class="fas fa-th-large"></i>
             </a>
-        </li>
+        </li>  --}}
     </ul>
 </nav>
