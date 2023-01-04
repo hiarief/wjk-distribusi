@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Siode\KartuKeluargaController;
 use App\Http\Controllers\Siode\Dashboard\DashboardController;
 
 /*
@@ -87,4 +88,5 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 Route::group(['middleware' => ['auth'], 'prefix' => 'siode', 'as' => 'siode.'], function () {
 
     Route::resource('dashboard', DashboardController::class);
+    Route::resource('kartu-keluarga', KartuKeluargaController::class);
 });

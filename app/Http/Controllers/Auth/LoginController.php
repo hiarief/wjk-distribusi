@@ -9,7 +9,7 @@ use App\Http\Requests\Auth\LoginRequest;
 
 class LoginController extends Controller
 {
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/login';
     
     public function __construct()
     {
