@@ -163,6 +163,10 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Laravolt\Indonesia\ServiceProvider::class,
+        OwenIt\Auditing\AuditingServiceProvider::class,
+        // php artisan vendor:publish --provider "OwenIt\Auditing\AuditingServiceProvider" --tag="config"
+        // php artisan vendor:publish --provider "OwenIt\Auditing\AuditingServiceProvider" --tag="migrations"
 
         /*
          * Package Service Providers...
@@ -232,6 +236,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
+        'Indonesia' => Laravolt\Indonesia\Facade::class,
+        // php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
+        // php artisan migrate
+        // php artisan laravolt:indonesia:seed
 
     ],
 
