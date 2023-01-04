@@ -15,7 +15,10 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{!! Auth::user()->name !!}</a>
+                <small class="text-warning">
+                    Sebagai : {{ Auth::user()->roles->pluck('name')[0] ?? '' }}
+                </small>
             </div>
         </div>
 
@@ -23,36 +26,45 @@
             <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-flat nav-child-indent nav-collapse-hide-child text-sm"
                 data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('siode.dashboard.index') }}" class="nav-link {!! request()->is(['siode/dashboard']) || request()->is(['siode/dashboard/*']) ? 'active' : '' !!}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Starter Pages
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item {!! request()->is(['permissions', 'roles', 'users']) || request()->is(['permissions/*', 'roles/*', 'users/*'])
+                    ? 'menu-open'
+                    : '' !!}">
+                    <a href="#" class="nav-link {!! request()->is(['permissions', 'roles', 'users']) || request()->is(['permissions/*', 'roles/*', 'users/*'])
+                        ? 'active'
+                        : '' !!}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Admin
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Active Page</p>
+                            <a href="{{ route('permissions.index') }}" class="nav-link {!! request()->is(['permissions']) || request()->is(['permissions/*']) ? 'active' : '' !!}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Permissions</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Inactive Page</p>
+                            <a href="{{ route('roles.index') }}" class="nav-link {!! request()->is(['roles']) || request()->is(['roles/*']) ? 'active' : '' !!}">
+                                <i class="far fa-circle nav-icon text-warning"></i>
+                                <p>Roles</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link {!! request()->is(['users']) || request()->is(['users/*']) ? 'active' : '' !!}">
+                                <i class="far fa-circle nav-icon text-danger"></i>
+                                <p>Users</p>
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Simple Link
-                            <span class="right badge badge-danger">New</span>
-                        </p>
-                    </a>
                 </li>
             </ul>
         </nav>

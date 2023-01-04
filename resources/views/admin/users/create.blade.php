@@ -1,13 +1,14 @@
-@extends('layouts.app-master')
-
+@extends('layouts.siode.app')
+@section('title', 'Create User')
 @section('content')
-    <div class="bg-light rounded p-4">
-        <h1>Add new user</h1>
-        <div class="lead">
-            Add new user and assign role.
-        </div>
 
-        <div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h5>Add new user and assign role.</h5>
+            </div>
+        </div>
+        <div class="card-body">
             <form method="POST" action="">
                 @csrf
                 <div class="mb-3">
@@ -43,28 +44,14 @@
                         <span class="text-danger text-left">{{ $errors->first('password') }}</span>
                     @endif
                 </div>
-                {{--  <div class="row">
-                    <div class="col">
-                        <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
-                            <label for="password">{!! trans('cruds.user.fields.password') !!}</label>
-                            <input type="password" id="password" name="password"
-                                class="form-control form-control-sm rounded-0" required>
-                            @if ($errors->has('password'))
-                                <em class="invalid-feedback">
-                                    {!! $errors->first('password') !!}
-                                </em>
-                            @endif
-                            <p class="helper-block">
-                                {!! trans('cruds.user.fields.password_helper') !!}
-                            </p>
-                        </div>
-                    </div>
-                </div>  --}}
 
-                <button type="submit" class="btn btn-primary">Save user</button>
-                <a href="{{ route('users.index') }}" class="btn btn-default">Back</a>
+                <button type="submit" class="btn bg-gradient-primary btn-sm">Save user</button>
+                <a href="{{ route('users.index') }}" class="btn bg-gradient-secondary btn-sm">Back</a>
             </form>
         </div>
+        <div class="card-footer">
 
+        </div>
     </div>
+
 @endsection

@@ -1,16 +1,17 @@
-@extends('layouts.app-master')
-
+@extends('layouts.siode.app')
+@section('title', 'Update user')
 @section('content')
-    <div class="bg-light rounded p-4">
-        <h1>Update user</h1>
-        <div class="lead">
 
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h5>Update user</h5>
+            </div>
         </div>
-
-        <div class="container mt-4">
-            <form method="post" action="{{ route('users.update', $user->id) }}">
-                @method('patch')
-                @csrf
+        <form method="post" action="{{ route('users.update', $user->id) }}">
+            @method('patch')
+            @csrf
+            <div class="card-body">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input value="{{ $user->name }}" type="text" class="form-control" name="name" placeholder="Name"
@@ -58,10 +59,13 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update user</button>
-                <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</button>
-            </form>
-        </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn bg-gradient-primary btn-sm">Update user</button>
+                <a href="{{ route('users.index') }}" class="btn bg-gradient-navy btn-sm">Cancel</a>
 
+            </div>
+        </form>
     </div>
+
 @endsection

@@ -31,8 +31,8 @@
         </div>
         <div class="card-footer">
             <div class="mt-4">
-                <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-info">Edit</a>
-                <a href="{{ route('roles.index') }}" class="btn btn-default">Back</a>
+                <a href="{{ route('roles.edit', $role->id) }}" class="btn bg-gradient-blue btn-sm">Edit</a>
+                <a href="{{ route('roles.index') }}" class="btn bg-gradient-navy btn-sm">Back</a>
             </div>
         </div>
     </div>
