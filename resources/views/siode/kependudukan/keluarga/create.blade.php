@@ -29,7 +29,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="">Provinsi</label>
-                            <select class="form-control form-control-sm select2 text-sm" style="text-transform:uppercase"
+                            <select class="form-control form-control-sm select2bs4 text-sm" style="text-transform:uppercase"
                                 style="width: 100%;" name="provinsi" id="province" required>
                                 <option value="" hidden>Pilih Provinsi</option>
                                 @foreach ($provinces as $id => $name)
@@ -373,6 +373,43 @@
 
     <script src="{!! URL::asset('assets/dist/plugins/select2/js/select2.full.min.js') !!}"></script>
     <script>
-        console.log('HI')
+        $(function() {
+            $('#province').on('change', function() {
+                axios.post('{{ route('dependent-dropdown.store.city') }}', {
+                        id: $(this).val()
+                    })
+                    .then(function(response) {
+                        $('#city').empty();
+
+                        $.each(response.data, function(id, name) {
+                            $('#city').append(new Option(name, id))
+                        })
+                    });
+            });
+            $('#city').on('change', function() {
+                axios.post('{{ route('dependent-dropdown.store.district') }}', {
+                        id: $(this).val()
+                    })
+                    .then(function(response) {
+                        $('#district').empty();
+
+                        $.each(response.data, function(id, name) {
+                            $('#district').append(new Option(name, id))
+                        })
+                    });
+            });
+            $('#district').on('change', function() {
+                axios.post('{{ route('dependent-dropdown.store.village') }}', {
+                        id: $(this).val()
+                    })
+                    .then(function(response) {
+                        $('#village').empty();
+
+                        $.each(response.data, function(id, name) {
+                            $('#village').append(new Option(name, id))
+                        })
+                    });
+            });
+        });
     </script>
 @endpush

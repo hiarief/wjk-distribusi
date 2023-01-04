@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Siode\KartuKeluargaController;
 use App\Http\Controllers\Siode\Dashboard\DashboardController;
+use App\Http\Controllers\Dropdown\DependentDropdownController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,3 +91,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'siode', 'as' => 'siode.'], 
     Route::resource('dashboard', DashboardController::class);
     Route::resource('kartu-keluarga', KartuKeluargaController::class);
 });
+//// ROUTE UNTUK DROPDOWN WILAYAH ////
+Route::get('dependent-dropdown', [DependentDropdownController::class, 'index'])->name('dependent-dropdown.index');
+Route::post('dependent-dropdown-city', [DependentDropdownController::class, 'store'])->name('dependent-dropdown.store.city');
+Route::post('dependent-dropdown-district', [DependentDropdownController::class, 'storeDistrict'])->name('dependent-dropdown.store.district');
+Route::post('dependent-dropdown-village', [DependentDropdownController::class, 'storeVillage'])->name('dependent-dropdown.store.village');
