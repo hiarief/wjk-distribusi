@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="card-title">
                         <a href="{{ route('siode.kependudukan.kartu-keluarga.create') }}"
-                            class="btn btn-xs bg-gradient-primary"><i class="fa-solid fa-square-plus"></i>
+                            class="btn btn-xs bg-gradient-primary"><i class="fa-solid fa-plus"></i>
                             Tambah</a>
                         <a href="{{ route('siode.kependudukan.kartu-keluarga.view-delete') }}"
                             class="btn btn-xs bg-gradient-danger"><i class="fa-solid fa-trash"></i> Trash</a>
@@ -89,6 +89,16 @@
                             @endforelse
                         </tbody>
                         <tfoot>
+                            <tr class="text-center">
+                                <th style="width: 1%">No</th>
+                                <th>Aksi</th>
+                                <th>No KK</th>
+                                <th>No NIK</th>
+                                <th>Nama</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Tempat Lahir</th>
+                                <th>Alamat</th>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>
