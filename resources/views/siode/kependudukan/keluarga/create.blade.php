@@ -353,12 +353,11 @@
 @push('styles')
     <link rel="stylesheet" href="{!! URL::asset('assets/dist/plugins/select2/css/select2.min.css') !!}">
     <link rel="stylesheet" href="{!! URL::asset('assets/dist/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') !!}">
-    <script>
-        console.log('HI')
-    </script>
 @endpush
 
 @push('scripts')
+    <script src="{!! URL::asset('assets/dist/plugins/select2/js/select2.full.min.js') !!}"></script>
+    <script src="{!! URL::asset('assets/dist/plugins/axios/axios.min.js') !!}"></script>
     <script>
         $(function() {
             //Initialize Select2 Elements
@@ -368,12 +367,9 @@
             $('.select2bs4').select2({
                 theme: 'bootstrap4'
             })
-        })
-    </script>
 
-    <script src="{!! URL::asset('assets/dist/plugins/select2/js/select2.full.min.js') !!}"></script>
-    <script>
-        $(function() {
+
+            // Depent dropdown
             $('#province').on('change', function() {
                 axios.post('{{ route('dependent-dropdown.store.city') }}', {
                         id: $(this).val()
@@ -410,6 +406,7 @@
                         })
                     });
             });
-        });
+            // end depentdropdown
+        })
     </script>
 @endpush
