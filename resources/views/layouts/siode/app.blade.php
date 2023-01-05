@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="csrf-token" content="{!! csrf_token() !!}">
     <title>@yield('title') | Siode</title>
 
     <link rel="stylesheet"
@@ -48,6 +50,28 @@
                                         Error, {{ session('error') }}
                                     </div>
                                 @endif
+
+                                {{--  message validate  --}}
+                                @if (session('message'))
+                                    <div class="row mb-2">
+                                        <div class="col-lg-12">
+                                            <div class="alert alert-success" role="alert">{!! session('message') !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if ($errors->count() > 0)
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <ul class="list-unstyled">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{!! $error !!}</li>
+                                            @endforeach
+                                        </ul>
+                                        <button type="button" class="close btn-sm btn text-white" data-dismiss="alert"
+                                            aria-hidden="true"><i
+                                                class="fa-regular fa-rectangle-xmark bg-gradient-navy text-white"></i></button>
+                                    </div>
+                                @endif
                             </ol>
                         </div>
                     </div>
@@ -84,8 +108,8 @@
     <script src="{{ URL::asset('assets/dist/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('assets/dist/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ URL::asset('assets/dist/js/adminlte.min.js') }}"></script>
-    @stack('scripts')
 
+    @stack('scripts')
 </body>
 
 </html>
