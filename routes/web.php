@@ -42,12 +42,11 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    
     /**
      * Logout Routes
      */
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
-        
+
     Route::get('/{user}/profil', [UsersController::class, 'profil'])->name('users.profil');
     // Change Password Routes...
     Route::get('change_password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('auth.change_password');
@@ -55,7 +54,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'permission']], function () {
-
     /**
      * User Routes
      */
@@ -68,7 +66,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::patch('/{user}/update', [UsersController::class, 'update'])->name('users.update');
         Route::delete('/{user}/delete', [UsersController::class, 'destroy'])->name('users.destroy');
     });
-    
+
     /**
      * User Routes
      */
@@ -81,15 +79,23 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
         Route::patch('/{post}/update', [PostsController::class, 'update'])->name('posts.update');
         Route::delete('/{post}/delete', [PostsController::class, 'destroy'])->name('posts.destroy');
     });
-    
+
     Route::resource('roles', RolesController::class);
     Route::resource('permissions', PermissionsController::class);
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'siode', 'as' => 'siode.'], function () {
-
     Route::resource('dashboard', DashboardController::class);
-    Route::resource('kartu-keluarga', KartuKeluargaController::class);
+
+    Route::group(['middleware' => ['auth'], 'prefix' => 'kependudukan', 'as' => 'kependudukan.'], function () {
+
+        
+        Route::get('kartu-keluarga/view-delete', [KartuKeluargaController::class, 'viewDelete'])->name('kartu-keluarga.view-delete');
+        Route::get('kartu-keluarga/restore/{kepala_keluarga}', [KartuKeluargaController::class, 'restore'])->name('kartu-keluarga.restore');
+        Route::delete('kartu-keluarga/kill/{kepala_keluarga}', [KartuKeluargaController::class, 'kill'])->name('kartu-keluarga.kill');
+        Route::resource('kartu-keluarga', KartuKeluargaController::class);
+        
+    });
 });
 //// ROUTE UNTUK DROPDOWN WILAYAH ////
 Route::get('dependent-dropdown', [DependentDropdownController::class, 'index'])->name('dependent-dropdown.index');

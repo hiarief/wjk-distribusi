@@ -1,21 +1,17 @@
 @extends('layouts.siode.app')
-@section('title', 'Kartu Keluarga')
+@section('title', 'Data terhapus')
 @section('content')
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
+        <div class="col-12">
+            <div class="card card-warning card-outline rounded-0 table-responsive">
                 <div class="card-header">
-                    <div class="card-title">
-                        <a href="{{ route('siode.kependudukan.kartu-keluarga.create') }}"
-                            class="btn btn-xs bg-gradient-primary"><i class="fa-solid fa-square-plus"></i>
-                            Tambah</a>
-                        <a href="{{ route('siode.kependudukan.kartu-keluarga.view-delete') }}"
-                            class="btn btn-xs bg-gradient-danger"><i class="fa-solid fa-trash"></i> Trash</a>
-                    </div>
+                    <h3 class="card-title">
+                        <a href="{{ route('siode.kependudukan.kartu-keluarga.index') }}"
+                            class="btn btn-xs bg-gradient-navy"><i class="fa-sharp fa-solid fa-backward-step"></i> Kembali</a>
+                    </h3>
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 250px;">
-                            <input type="text" name="table_search" class="form-control float-right"
-                                placeholder="Cari...">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fas fa-search"></i>
@@ -29,47 +25,20 @@
                         class="table-bordered table-hover table-striped rounded-0 table-sm table py-0 text-sm">
                         <thead>
                             <tr class="text-center">
-                                <th style="width: 1%">No</th>
-                                <th>Aksi</th>
+                                <th style="width: 10px">No</th>
                                 <th>No KK</th>
                                 <th>No NIK</th>
                                 <th>Nama</th>
                                 <th>Tanggal Lahir</th>
                                 <th>Tempat Lahir</th>
                                 <th>Alamat</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($kartukeluargaanggota as $value => $fm)
                                 <tr class="text-center">
-                                    <td class="text-center">{{ $kartukeluargaanggota->firstItem() + $value }}</td>
-                                    <td class="text-center">
-                                        <div class="btn-group text-center">
-                                            <button type="button"
-                                                class="btn bg-gradient-success dropdown-toggle dropdown-icon btn-sm"
-                                                data-toggle="dropdown">
-                                                <span class="bg-gradient-success sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <div class="dropdown-menu" role="menu">
-                                                <form method="POST" action="{!! route('siode.kependudukan.kartu-keluarga.destroy', $fm->id) !!}" class="text-center">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <a class="dropdown-item bg-gradient-info"
-                                                        href="{{ route('siode.kependudukan.kartu-keluarga.show', $fm->no_kk) }}"><i
-                                                            class="fa-solid fa-eye"></i>
-                                                        View</a>
-                                                    <a class="dropdown-item bg-gradient-warning"
-                                                        href="{{ route('siode.kependudukan.kartu-keluarga.edit', $fm->id) }}"><i
-                                                            class="fa-solid fa-pen"></i>
-                                                        Edit</a>
-                                                    <a class="dropdown-item bg-gradient-danger show_confirm"
-                                                        data-nama="{!! $fm->nama !!}" type="submit"><i
-                                                            class="fa-solid fa-trash"></i>
-                                                        Delete</a>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $fm->kartukeluarga->no_kk }}</td>
                                     <td>{{ $fm->no_nik }}</td>
                                     <td style="text-transform:uppercase">{{ $fm->nama }}</td>
@@ -82,13 +51,61 @@
                                         {{ $fm->kartukeluarga->villages->name }},
                                         KEC. {{ $fm->kartukeluarga->districts->name }}
                                     </td>
-
+                                    <td class="text-center">
+                                        <div class="btn-group text-center">
+                                            {{--  <button type="button" class="btn bg-gradient-success btn-sm"></button>  --}}
+                                            <button type="button"
+                                                class="btn bg-gradient-success dropdown-toggle dropdown-icon btn-sm"
+                                                data-toggle="dropdown">
+                                                <span class="bg-gradient-success sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                                <form method="POST" action="{!! route('siode.kependudukan.kartu-keluarga.kill', $fm->id) !!}" class="text-center">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <a class="dropdown-item bg-gradient-info"
+                                                        href="{{ route('siode.kependudukan.kartu-keluarga.show', $fm->id) }}"><i
+                                                            class="fa-solid fa-eye"></i>
+                                                        View</a>
+                                                    <a class="dropdown-item bg-gradient-warning"
+                                                        href="{{ route('siode.kependudukan.kartu-keluarga.restore', $fm->id) }}"><i
+                                                            class="fa-solid fa-pen"></i>
+                                                        Restore</a>
+                                                    <a class="dropdown-item bg-gradient-danger show_confirm"
+                                                        data-nama="{!! $fm->nama !!}" type="submit"><i
+                                                            class="fa-solid fa-trash"></i>
+                                                        Delete</a>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
+
+                                {{--  <td style="width: 175px">
+                                        <form method="POST" action="{!! route('siode.kependudukan.keluarga.destroy', $population->id) !!}" class="text-center">
+                                            @csrf
+                                            @method('delete')
+                                            <a href="{!! route('siode.kependudukan.kk') !!}" class="btn bg-gradient-info btn-xs text-xs">
+                                                <i class="fa-solid fa-eye"></i> Show</a>
+                                            <a href="{!! route('siode.kependudukan.keluarga.edit', $population->id) !!}"
+                                                class="btn bg-gradient-warning btn-xs text-xs">
+                                                <i class="fa-solid fa-pen"></i> Edit</a>
+                                            <button type="submit" class="btn bg-gradient-danger btn-xs text-xs"
+                                                name="button"><i class="fa-solid fa-trash"></i> Delete</button>
+                                        </form>
+                                    </td>  --}}
                             @empty
                                 <h4>tidak ada data</h4>
                             @endforelse
                         </tbody>
                         <tfoot>
+                            {{--  <tr class="text-center">
+                                <th style="width: 10px">No</th>
+                                <th>No KK</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Aksi</th>
+                            </tr>  --}}
                         </tfoot>
                     </table>
                 </div>
@@ -103,6 +120,7 @@
             </div>
         </div>
     </div>
+    {{--  @include('sweetalert::alert')  --}}
 @endsection
 
 @push('styles')
