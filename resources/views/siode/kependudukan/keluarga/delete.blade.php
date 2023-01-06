@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="card card-warning card-outline rounded-0 table-responsive">
+            <div class="card card-warning card-outline table-responsive">
                 <div class="card-header">
                     <h3 class="card-title">
                         <a href="{{ route('siode.kependudukan.kartu-keluarga.index') }}"
@@ -21,8 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="example1"
-                        class="table-bordered table-hover table-striped rounded-0 table-sm table py-0 text-sm">
+                    <table id="example1" class="table-bordered table-hover table-striped table-sm table py-0 text-sm">
                         <thead>
                             <tr class="text-center">
                                 <th style="width: 10px">No</th>
@@ -38,7 +37,7 @@
                         <tbody>
                             @forelse ($kartukeluargaanggota as $value => $fm)
                                 <tr class="text-center">
-                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $kartukeluargaanggota->firstItem() + $value }}</td>
                                     <td>{{ $fm->kartukeluarga->no_kk }}</td>
                                     <td>{{ $fm->no_nik }}</td>
                                     <td style="text-transform:uppercase">{{ $fm->nama }}</td>
@@ -67,7 +66,8 @@
                                                         href="{{ route('siode.kependudukan.kartu-keluarga.show', $fm->id) }}"><i
                                                             class="fa-solid fa-eye"></i>
                                                         View</a>
-                                                    <a class="dropdown-item bg-gradient-warning"
+                                                    <a class="dropdown-item bg-gradient-warning show_restore"
+                                                        data-nama="{!! $fm->nama !!}"
                                                         href="{{ route('siode.kependudukan.kartu-keluarga.restore', $fm->id) }}"><i
                                                             class="fa-solid fa-pen"></i>
                                                         Restore</a>
@@ -153,6 +153,32 @@
                         swal(
                             'Terhapus!',
                             'Data berhasil di Hapus!',
+                            'success'
+                        )
+                    }
+                });
+        });
+        $('.show_restore').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            var nama_data = $(this).attr('data-nama');
+            event.preventDefault();
+            swal({
+                    title: `Apakah anda yakin ?`,
+                    text: "Data " + nama_data + " akan dipulihkan !",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                        swal(
+                            'Dipulihkan !',
+                            'Data berhasil di dipulihkan !',
                             'success'
                         )
                     }

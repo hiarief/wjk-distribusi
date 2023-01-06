@@ -97,7 +97,7 @@ class KartuKeluargaController extends Controller
 
             DB::commit();
             return redirect()
-                ->route('siode.kartu-keluarga.index')
+                ->route('siode.kependudukan.kartu-keluarga.index')
                 ->with('success', 'Data berhasil disimpan !');
         } catch (\Exception $e) {
             DB::rollback();
@@ -120,51 +120,59 @@ class KartuKeluargaController extends Controller
         $kewarganegaraan = Kewarganegaraan::orderBy('id', 'ASC')->pluck('nama', 'id');
         $jeniskelamin = JenisKelamin::orderBy('id', 'ASC')->pluck('nama', 'id');
         $rtrw = RtRw::get();
-        
-        return view('siode.kependudukan.keluarga.edit', compact('kartukeluargaanggota','provinces', 'pekerjaan', 'pernikahan', 'hubungankeluarga', 'goldarah', 'pendidikankeluarga', 'agama', 'kewarganegaraan', 'jeniskelamin', 'rtrw'));
-    
+
+        return view('siode.kependudukan.keluarga.edit', compact('kartukeluargaanggota', 'provinces', 'pekerjaan', 'pernikahan', 'hubungankeluarga', 'goldarah', 'pendidikankeluarga', 'agama', 'kewarganegaraan', 'jeniskelamin', 'rtrw'));
     }
 
     public function update(UpdateKartuKeluargaRequest $request, $kartu_keluarga)
     {
-        $d = $request->all();
-        $kartukeluarga = KartuKeluarga::findOrFail($request->famillyid)->update([
-            'no_kk' => $d['no_kk'],
-            'kp' => $d['kp'],
-            'rt' => $d['rt'],
-            'rw' => $d['rw'],
-            'kodepos' => $d['kodepos'],
-            'desa' => $d['desa'],
-            'kecamatan' => $d['kecamatan'],
-            'kabkot' => $d['kabkot'],
-            'provinsi' => $d['provinsi'],
-        ]);
-        $kartukeluargaanggota = KartuKeluargaAnggota::findOrFail($kartu_keluarga)->update([
-            'no_kk' => $d['famillyid'],
-            'no_nik' => $d['no_nik'],
-            'nama' => $d['nama'],
-            'jenkel' => $d['jenkel'],
-            'tgl_lahir' => $d['tgl_lahir'],
-            'tmpt_lahir' => $d['tmpt_lahir'],
-            'agama' => $d['agama'],
-            'pendidikan' => $d['pendidikan'],
-            'jns_pekerjaan' => $d['jns_pekerjaan'],
-            'gol_darah' => $d['gol_darah'],
-            'sts_perkawinan' => $d['sts_perkawinan'],
-            'tgl_perkawinan' => $d['tgl_perkawinan'],
-            'sts_hub_kel' => $d['sts_hub_kel'],
-            'sts_kwn' => $d['sts_kwn'],
-            'nm_ayah' => $d['nm_ayah'],
-            'nm_ibu' => $d['nm_ibu'],
-            'nik_ayah' => $d['nik_ayah'],
-            'nik_ibu' => $d['nik_ibu'],
-            'no_paspor' => $d['no_paspor'],
-            'no_kitap' => $d['no_kitap'],
-        ]);
-        // Alert::success('Success', 'Data berhasil diupdate !');
-        return redirect()
-            ->route('siode.kartu-keluarga.index')
-            ->with('success', 'Data berhasil disimpan !');
+        DB::beginTransaction();
+        try {
+            $d = $request->all();
+            $kartukeluarga = KartuKeluarga::findOrFail($request->famillyid)->update([
+                'no_kk' => $d['no_kk'],
+                'kp' => $d['kp'],
+                'rt' => $d['rt'],
+                'rw' => $d['rw'],
+                'kodepos' => $d['kodepos'],
+                'desa' => $d['desa'],
+                'kecamatan' => $d['kecamatan'],
+                'kabkot' => $d['kabkot'],
+                'provinsi' => $d['provinsi'],
+            ]);
+            $kartukeluargaanggota = KartuKeluargaAnggota::findOrFail($kartu_keluarga)->update([
+                'no_kk' => $d['famillyid'],
+                'no_nik' => $d['no_nik'],
+                'nama' => $d['nama'],
+                'jenkel' => $d['jenkel'],
+                'tgl_lahir' => $d['tgl_lahir'],
+                'tmpt_lahir' => $d['tmpt_lahir'],
+                'agama' => $d['agama'],
+                'pendidikan' => $d['pendidikan'],
+                'jns_pekerjaan' => $d['jns_pekerjaan'],
+                'gol_darah' => $d['gol_darah'],
+                'sts_perkawinan' => $d['sts_perkawinan'],
+                'tgl_perkawinan' => $d['tgl_perkawinan'],
+                'sts_hub_kel' => $d['sts_hub_kel'],
+                'sts_kwn' => $d['sts_kwn'],
+                'nm_ayah' => $d['nm_ayah'],
+                'nm_ibu' => $d['nm_ibu'],
+                'nik_ayah' => $d['nik_ayah'],
+                'nik_ibu' => $d['nik_ibu'],
+                'no_paspor' => $d['no_paspor'],
+                'no_kitap' => $d['no_kitap'],
+            ]);
+            // Alert::success('Success', 'Data berhasil diupdate !');
+            DB::commit();
+            return redirect()
+                ->route('siode.kependudukan.kartu-keluarga.index')
+                ->with('success', 'Data berhasil diupdate !');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()
+                ->back()
+                ->with('error', 'Data gagal diupdate !');
+        }
     }
 
     public function destroy($kartu_keluarga)

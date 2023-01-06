@@ -8,6 +8,10 @@
     <meta name="csrf-token" content="{!! csrf_token() !!}">
     <title>@yield('title') | Siode</title>
 
+
+    <link href="{{ URL::asset('images/desa.png') }}" rel='shortcut icon'>
+    <link rel="icon" href="{{ URL::asset('images/desa.png') }}" type="image/x-icon" />
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 

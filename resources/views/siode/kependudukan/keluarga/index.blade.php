@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card card-dark card-outline table-responsive">
                 <div class="card-header">
                     <div class="card-title">
                         <a href="{{ route('siode.kependudukan.kartu-keluarga.create') }}"
@@ -102,16 +102,17 @@
                         </tfoot>
                     </table>
                 </div>
-                <div class="card-footer clearfix"></div>
-                Halaman : {{ $kartukeluargaanggota->currentPage() }} <br />
-                Jumlah Data : {{ $kartukeluargaanggota->total() }} <br />
-                Data Per Halaman : {{ $kartukeluargaanggota->perPage() }}
-                <ul class="pagination pagination-sm float-right m-0">
-                    {{ $kartukeluargaanggota->links() }}
-                </ul>
+                <div class="card-footer clearfix">
+
+                    Halaman : {{ $kartukeluargaanggota->currentPage() }} <br />
+                    Jumlah Data : {{ $kartukeluargaanggota->total() }} <br />
+                    Data Per Halaman : {{ $kartukeluargaanggota->perPage() }}
+                    <ul class="pagination pagination-sm float-right m-0">
+                        {{ $kartukeluargaanggota->links() }}
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 
