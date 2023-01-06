@@ -17,11 +17,11 @@ class KartuKeluargaSeed extends Seeder
     public function run()
     {
        $faker = Factory::create();
-            $jumlahpenduduk = 1000;
+            $jumlahpenduduk = 300;
             for ($i=1; $i <= $jumlahpenduduk; $i++) {
                 $data = [
                     'no_kk' => $faker->numberBetween($min = 1, $max = 30),
-                    'no_nik' => $faker->unique()->numberBetween($min = 3603020000000001, $max = 360302999999999),
+                    'no_nik' => $faker->unique()->numberBetween($min = 3603021404970001, $max = 3603021409999999),
                     'nama' => $faker->name(),
                     'jenkel' => $faker->numberBetween($min = 1, $max = 2),
                     'tgl_lahir' => $faker->date('Y_m_d'),
@@ -36,8 +36,8 @@ class KartuKeluargaSeed extends Seeder
                     'sts_kwn' => $faker->numberBetween($min = 1, $max = 3),
                     'nm_ayah' => $faker->firstNameMale(),
                     'nm_ibu' => $faker->firstNameFemale(),
-                    'nik_ayah' => $faker->unique()->numberBetween($min = 3603020000000001, $max = 360302999999999),
-                    'nik_ibu' => $faker->unique()->numberBetween($min = 3603020000000001, $max = 360302999999999),
+                    'nik_ayah' => $faker->unique()->numberBetween($min = 3603021404970001, $max = 3603021409999999),
+                    'nik_ibu' => $faker->unique()->numberBetween($min = 3603021404970001, $max = 3603021409999999),
                     'no_paspor' => $faker->unique()->numberBetween($min = 1000000, $max = 5000000),
                     'no_kitap' => $faker->unique()->numberBetween($min = 1000000, $max = 5000000),
                     'user_id' => $faker->numberBetween($min = 1, $max = 10),
@@ -45,10 +45,10 @@ class KartuKeluargaSeed extends Seeder
                 ];
                 KartuKeluargaAnggota::create($data);
             }
-            $jumlahkk = 100;
+            $jumlahkk = 50;
             for ($i=1; $i <= $jumlahkk; $i++) {
                 $alamat = [
-                    'no_kk' => $faker->unique()->numberBetween($min = 3603020000000001, $max = 360302999999999),
+                    'no_kk' => $faker->unique()->numberBetween($min = 3603021404970001, $max = 3603021409999999),
                     'kp' => $faker->country(),
                     'rt' => $faker->numberBetween($min = 1, $max = 6),
                     'rw' => $faker->numberBetween($min = 1, $max = 6),
