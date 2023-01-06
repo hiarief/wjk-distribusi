@@ -17,6 +17,7 @@ class CreateRwsTable extends Migration
             $table->id();
             $table->string('no', 50)->nullable();
             $table->string('ketua', 50)->nullable();
+            $table->string('no_nik', 50)->nullable();
             $table->string('user_id', 50)->nullable();
             $table->timestamps();
         });
