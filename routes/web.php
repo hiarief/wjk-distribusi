@@ -14,6 +14,11 @@ use App\Http\Controllers\Siode\KartuKeluargaController;
 use App\Http\Controllers\Siode\Dashboard\DashboardController;
 use App\Http\Controllers\Dropdown\DependentDropdownController;
 use App\Http\Controllers\Siode\KartuKeluargaAnggotaController;
+use App\Http\Controllers\Siode\WilayahAdministratifController;
+use App\Http\Controllers\Siode\WilayahAdministratif\KpController;
+use App\Http\Controllers\Siode\WilayahAdministratif\RwController;
+use App\Http\Controllers\Siode\WilayahAdministratif\RtRwController;
+use App\Http\Controllers\Siode\WilayahAdministratif\DusunKpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +93,13 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 Route::group(['middleware' => ['auth'], 'prefix' => 'siode', 'as' => 'siode.'], function () {
     Route::resource('dashboard', DashboardController::class);
 
+    Route::group(['middleware' => ['auth'], 'prefix' => 'info-desa', 'as' => 'infodesa.'], function () {
+
+        Route::post('wilayah-administratif/rw-autocomplete', [RwController::class, 'autocomplete'])->name('rw.autocomplete');
+        Route::resource('wilayah-administratif/rw', RwController::class);
+        Route::resource('wilayah-administratif/kampung', KpController::class);
+
+    });
     Route::group(['middleware' => ['auth'], 'prefix' => 'kependudukan', 'as' => 'kependudukan.'], function () {
 
         Route::post('kartu-keluarga/anggota-keluarga/autocomplete-search', [KartuKeluargaAnggotaController::class, 'autocompleteSearch'])->name('kartu-keluarga.anggota-keluarga.autocomplete');

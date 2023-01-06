@@ -61,7 +61,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('siode.infodesa.rw.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Wilayah Administratif</p>
                             </a>
