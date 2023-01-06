@@ -18,7 +18,7 @@
     @stack('styles')
 </head>
 
-<body class="sidebar-mini sidebar-mini-xs text-sm">
+<body class="sidebar-mini text-sm">
     <div class="wrapper">
 
         @include('layouts.siode.navbar')

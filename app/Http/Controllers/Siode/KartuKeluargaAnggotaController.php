@@ -143,7 +143,24 @@ class KartuKeluargaAnggotaController extends Controller
 
     public function edit($anggota_keluarga)
     {
-        return $anggota_keluarga;
+        $kartukeluargaanggota = KartuKeluargaAnggota::whereSts_hub_kel(1)
+            ->with([
+                'kartukeluarga' => function ($q) {
+                    $q->with(['provinces', 'cities', 'districts', 'villages']);
+                },
+            ])
+            ->get();
+        $anggota = KartuKeluargaAnggota::with('kartukeluarga')->findOrFail($anggota_keluarga);
+        $pekerjaan = Pekerjaan::orderBy('nama', 'ASC')->pluck('nama', 'id');
+        $pernikahan = Pernikahan::orderBy('id', 'ASC')->pluck('nama', 'id');
+        $hubungankeluarga = HubunganKeluarga::orderBy('id', 'ASC')->pluck('nama', 'id');
+        $goldarah = GolDarah::orderBy('id', 'ASC')->pluck('nama', 'id');
+        $pendidikankeluarga = PendidikanKeluarga::orderBy('id', 'ASC')->pluck('nama', 'id');
+        $agama = Agama::orderBy('id', 'ASC')->pluck('nama', 'id');
+        $kewarganegaraan = Kewarganegaraan::orderBy('id', 'ASC')->pluck('nama', 'id');
+        $jeniskelamin = JenisKelamin::orderBy('id', 'ASC')->pluck('nama', 'id');
+        $rtrw = RtRw::get();
+        return view('siode.kependudukan.penduduk.edit', compact('anggota','kartukeluargaanggota', 'pekerjaan', 'pernikahan', 'hubungankeluarga', 'goldarah', 'pendidikankeluarga', 'agama', 'kewarganegaraan', 'jeniskelamin', 'rtrw'));
     }
 
     public function update(UpdateKartuKeluargaAnggotaRequest $request)

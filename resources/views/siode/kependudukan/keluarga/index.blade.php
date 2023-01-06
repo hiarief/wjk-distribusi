@@ -24,13 +24,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table id="example1"
                         class="table-bordered table-hover table-striped rounded-0 table-sm table py-0 text-sm">
                         <thead>
                             <tr class="text-center">
                                 <th style="width: 1%">No</th>
-                                <th>Aksi</th>
+                                <th style="width: 1%">Aksi</th>
                                 <th>No KK</th>
                                 <th>No NIK</th>
                                 <th>Nama</th>
@@ -102,16 +102,16 @@
                         </tfoot>
                     </table>
                 </div>
-                <div class="card-footer">
-                    Halaman : {{ $kartukeluargaanggota->currentPage() }} <br />
-                    Jumlah Data : {{ $kartukeluargaanggota->total() }} <br />
-                    Data Per Halaman : {{ $kartukeluargaanggota->perPage() }}
-                    <ul class="pagination pagination-sm float-right m-0">
-                        {{ $kartukeluargaanggota->links() }}
-                    </ul>
-                </div>
+                <div class="card-footer clearfix"></div>
+                Halaman : {{ $kartukeluargaanggota->currentPage() }} <br />
+                Jumlah Data : {{ $kartukeluargaanggota->total() }} <br />
+                Data Per Halaman : {{ $kartukeluargaanggota->perPage() }}
+                <ul class="pagination pagination-sm float-right m-0">
+                    {{ $kartukeluargaanggota->links() }}
+                </ul>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 

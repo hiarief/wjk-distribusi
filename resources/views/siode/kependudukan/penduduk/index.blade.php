@@ -24,13 +24,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table id="example1"
                         class="table-bordered table-hover table-striped rounded-0 table-sm table py-0 text-sm">
                         <thead>
                             <tr class="text-center">
-                                <th style="width: 10px">No</th>
-                                <th>Aksi</th>
+                                <th style="width: 1%">No</th>
+                                <th style="width: 1%">Aksi</th>
                                 <th>No KK</th>
                                 <th>No NIK</th>
                                 <th>Nama</th>
@@ -88,6 +88,16 @@
                             @endforelse
                         </tbody>
                         <tfoot>
+                            <tr class="text-center">
+                                <th style="width: 10px">No</th>
+                                <th>Aksi</th>
+                                <th>No KK</th>
+                                <th>No NIK</th>
+                                <th>Nama</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Tempat Lahir</th>
+                                <th>Alamat</th>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>
