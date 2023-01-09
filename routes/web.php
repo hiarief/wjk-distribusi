@@ -16,6 +16,7 @@ use App\Http\Controllers\Dropdown\DependentDropdownController;
 use App\Http\Controllers\Siode\KartuKeluargaAnggotaController;
 use App\Http\Controllers\Siode\WilayahAdministratifController;
 use App\Http\Controllers\Siode\WilayahAdministratif\KpController;
+use App\Http\Controllers\Siode\WilayahAdministratif\RtController;
 use App\Http\Controllers\Siode\WilayahAdministratif\RwController;
 use App\Http\Controllers\Siode\WilayahAdministratif\RtRwController;
 use App\Http\Controllers\Siode\WilayahAdministratif\DusunKpController;
@@ -97,6 +98,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'siode', 'as' => 'siode.'], 
 
         Route::post('wilayah-administratif/rw-autocomplete', [RwController::class, 'autocomplete'])->name('rw.autocomplete');
         Route::resource('wilayah-administratif/rw', RwController::class);
+        Route::resource('wilayah-administratif/rt', RtController::class);
         Route::resource('wilayah-administratif/kampung', KpController::class);
 
     });

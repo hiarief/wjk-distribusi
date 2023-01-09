@@ -21,8 +21,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('siode.infodesa.kampung.index') }}" class="nav-link">
-                                <i class="far fa-envelope"></i> Kampung
+                            <a href="{{ route('siode.infodesa.rt.index') }}" class="nav-link">
+                                <i class="far fa-envelope"></i> Rt
                             </a>
                         </li>
                     </ul>
