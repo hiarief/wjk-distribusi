@@ -22,14 +22,14 @@
                         <tr class="text-center">
                             <th>No Rw</th>
                             @foreach ($kampungs as $warga => $kampung)
-                                <th colspan="{{ $kampung->count() }}">{{ $warga }}</th>
+                                <th colspan="{{ $kampung->count() + 2 }}">{{ $warga }}</th>
                             @endforeach
                         </tr>
                         <tr class="text-center">
                             <th style="width: 1%">Kampung/Blok</th>
                             @foreach ($kampungs as $warga => $kampung)
                                 @foreach ($kampung as $kp => $kamp)
-                                    <th>{{ $kamp->nama }}</th>
+                                    <th colspan="2">{{ $kamp->nama }}</th>
                                 @endforeach
                             @endforeach
                         </tr>
@@ -43,6 +43,7 @@
                             @foreach ($kampungs as $warga => $kampung)
                                 @foreach ($kampung as $kp => $kamp)
                                     <th class="text-center">Ketua</th>
+                                    <th class="text-center">Aksi</th>
                                 @endforeach
                             @endforeach
                         </tr class="text-center">
@@ -54,6 +55,13 @@
                                         <td>
                                             @foreach ($kamp->rukuntetangga->where('no', $key) as $rt => $tetangga)
                                                 {{ $tetangga->ketua }}
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($kamp->rukuntetangga->where('no', $key) as $rt => $tetangga)
+                                                <button class="btn btn-xs bg-gradient-info" style="text-transform:uppercase"
+                                                    type="button" id="button-addon2" data-toggle="modal"
+                                                    data-target="#edit"><i class="fa-solid fa-pen-to-square"></i></button>
                                             @endforeach
                                         </td>
                                     @endforeach
