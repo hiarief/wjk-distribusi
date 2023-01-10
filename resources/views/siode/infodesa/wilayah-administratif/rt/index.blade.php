@@ -1,6 +1,6 @@
 @extends('siode.infodesa.wilayah-administratif.wilayah-side')
 @section('content-administratif')
-    <div class="card card-primary card-outline">
+    <div class="card card-primary card-outline table-responsive">
         <div class="card-header">
             <h3 class="card-title">Rukun Tetangga</h3>
         </div>
@@ -19,29 +19,47 @@
             <div class="row">
                 <div class="col">
                     <table class="table-sm table-bordered table">
-                        <thead>
+                        <tr class="text-center">
+                            <th>No Rw</th>
+                            @foreach ($kampungs as $warga => $kampung)
+                                <th colspan="{{ $kampung->count() }}">{{ $warga }}</th>
+                            @endforeach
+                        </tr>
+                        <tr class="text-center">
+                            <th style="width: 1%">Kampung/Blok</th>
+                            @foreach ($kampungs as $warga => $kampung)
+                                @foreach ($kampung as $kp => $kamp)
+                                    <th>{{ $kamp->nama }}</th>
+                                @endforeach
+                            @endforeach
+                        </tr>
+                        <tr class="bg-gradient-light">
+                            @foreach ($kampungs as $warga => $kampung)
+                                <th colspan="{{ $kampung->count() }}"></th>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <th class="text-center">No Rt</th>
+                            @foreach ($kampungs as $warga => $kampung)
+                                @foreach ($kampung as $kp => $kamp)
+                                    <th class="text-center">Ketua</th>
+                                @endforeach
+                            @endforeach
+                        </tr class="text-center">
+                        @foreach ($keyby as $key => $by)
                             <tr class="text-center">
-                                <th style="width: 5%">No</th>
-                                <th>No Rt</th>
-                                <th>Ketua</th>
-                                <th colspan="3" style="width: 1%">Aksi</th>
+                                <th>{{ $key }}</th>
+                                @foreach ($kampungs as $warga => $kampung)
+                                    @foreach ($kampung as $kp => $kamp)
+                                        <td>
+                                            @foreach ($kamp->rukuntetangga->where('no', $key) as $rt => $tetangga)
+                                                {{ $tetangga->ketua }}
+                                            @endforeach
+                                        </td>
+                                    @endforeach
+                                @endforeach
                             </tr>
-                        </thead>
-                        <tbody>
-                            {{--  @forelse ($rt as $key => $r)
-                                <tr class="text-center">
-                                    <th>{{ $loop->iteration }}</th>
-                                    <td>{{ $r->no }}</td>
-                                    <td>{{ $r->ketua }}</td>
-                                    <td>View</td>
-                                    <td>Edit</td>
-                                    <td>Hapus</td>
-                                </tr>
-
-                            @empty
-                                <h4>tidak ada data</h4>
-                            @endforelse  --}}
-                        </tbody>
+                        @endforeach
                     </table>
                 </div>
             </div>
@@ -114,7 +132,8 @@
 @endsection
 @push('styles-administratif')
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/dist/plugins/jquery-ui/jquery-ui.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/dist/plugins/jquery-ui/jquery-ui.theme.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ URL::asset('assets/dist/plugins/jquery-ui/jquery-ui.theme.min.css') }}">
 @endpush
 
 @push('scripts-administratif')

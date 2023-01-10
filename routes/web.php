@@ -44,8 +44,8 @@ Route::group(['middleware' => ['guest']], function () {
     /**
      * Login Routes
      */
-    Route::get('/login', [LoginController::class, 'show'])->name('login.show');
-    Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
+    Route::get('/login-admin-siode', [LoginController::class, 'show'])->name('login.show');
+    Route::post('/login-admin-siode', [LoginController::class, 'login'])->name('login.perform');
 });
 
 Route::group(['middleware' => ['auth']], function () {

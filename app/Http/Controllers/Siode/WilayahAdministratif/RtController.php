@@ -15,7 +15,11 @@ class RtController extends Controller
     public function index()
     {
         $rw = Rw::pluck('no', 'id');
-        return view('siode.infodesa.wilayah-administratif.rt.index', compact('rw'));
+
+        // $warga = Rt::groupBy()
+        $kampungs = Kampung::with(['rukuntetangga','rukunwarga'])->orderBy('rw_id')->get()->groupBy('rw_id');
+        $keyby = Rt::get()->keyBy('no');
+        return view('siode.infodesa.wilayah-administratif.rt.index', compact('rw','kampungs', 'keyby'));
     }
 
     public function store(Request $request)
